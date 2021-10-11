@@ -27,10 +27,13 @@ compileGroovy {
 // This module also builds Kotlin code and the compileKotlin task
 // naturally depends on compileJava.
 // We need to redefine dependencies to break task cycles.
+
+// TODO 源代码最初版本
 //compileGroovy.dependsOn = compileGroovy.taskDependencies.values - 'compileJava'
 //compileKotlin.dependsOn(compileGroovy)
 //compileKotlin.classpath += files(compileGroovy.destinationDir)
 
+// 需要在本地编译，改写后版本
 def deps = compileGroovy.taskDependencies.immutableValues + compileGroovy.taskDependencies.mutableValues
 compileGroovy.dependsOn = deps - "compileJava"
 compileKotlin.dependsOn(compileGroovy)
